@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Weather_Client" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ehc-YD-afb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="392"/>
+                            </mapView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="1" maxValue="70" translatesAutoresizingMaskIntoConstraints="NO" id="ApF-4X-XTk">
+                                <rect key="frame" x="14" y="420" width="347" height="31"/>
+                                <connections>
+                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="CD3-Yl-fX6"/>
+                                </connections>
+                            </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYy-rx-6v2">
+                                <rect key="frame" x="16" y="484" width="343" height="150"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZx-AL-GLT">
+                                        <rect key="frame" x="15" y="18" width="312" height="67"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="67" id="Dis-WM-QDP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRL-oQ-baR">
+                                        <rect key="frame" x="148" y="93" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="EZx-AL-GLT" firstAttribute="centerX" secondItem="hYy-rx-6v2" secondAttribute="centerX" id="YA5-Sr-6oP"/>
+                                    <constraint firstItem="EZx-AL-GLT" firstAttribute="leading" secondItem="hYy-rx-6v2" secondAttribute="leading" constant="15" id="Zqn-Qb-O6x"/>
+                                    <constraint firstItem="gRL-oQ-baR" firstAttribute="top" secondItem="EZx-AL-GLT" secondAttribute="bottom" constant="8" symbolic="YES" id="dDO-Rg-Umo"/>
+                                    <constraint firstItem="EZx-AL-GLT" firstAttribute="top" secondItem="hYy-rx-6v2" secondAttribute="top" constant="18" id="fsO-ct-ZS9"/>
+                                    <constraint firstItem="gRL-oQ-baR" firstAttribute="centerX" secondItem="EZx-AL-GLT" secondAttribute="centerX" id="u0O-ki-9et"/>
+                                    <constraint firstAttribute="bottom" secondItem="gRL-oQ-baR" secondAttribute="bottom" constant="27" id="yaT-2v-NvY"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ApF-4X-XTk" firstAttribute="top" secondItem="Ehc-YD-afb" secondAttribute="bottom" constant="8" symbolic="YES" id="DHD-1w-7w8"/>
+                            <constraint firstItem="ApF-4X-XTk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Hf4-Vi-a0G"/>
+                            <constraint firstItem="Ehc-YD-afb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="MF4-9T-W9B"/>
+                            <constraint firstItem="ApF-4X-XTk" firstAttribute="trailing" secondItem="hYy-rx-6v2" secondAttribute="trailing" id="TbQ-Ii-HHn"/>
+                            <constraint firstItem="Ehc-YD-afb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cXr-im-Zt2"/>
+                            <constraint firstItem="Ehc-YD-afb" firstAttribute="centerX" secondItem="ApF-4X-XTk" secondAttribute="centerX" id="gI7-fA-euU"/>
+                            <constraint firstItem="ApF-4X-XTk" firstAttribute="leading" secondItem="hYy-rx-6v2" secondAttribute="leading" id="l1T-8q-LBT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hYy-rx-6v2" secondAttribute="bottom" constant="33" id="mum-oE-ngI"/>
+                            <constraint firstAttribute="trailing" secondItem="Ehc-YD-afb" secondAttribute="trailing" id="yKy-I2-kLe"/>
+                            <constraint firstItem="hYy-rx-6v2" firstAttribute="top" secondItem="ApF-4X-XTk" secondAttribute="bottom" constant="34" id="yOG-uv-jre"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cityDetailsView" destination="hYy-rx-6v2" id="T4D-Ra-DDT"/>
+                        <outlet property="cityLabel" destination="EZx-AL-GLT" id="GRG-Y9-kNw"/>
+                        <outlet property="mapView" destination="Ehc-YD-afb" id="WCq-rf-bq7"/>
+                        <outlet property="verticalConstraint" destination="yOG-uv-jre" id="N8b-cH-5ql"/>
+                        <outlet property="zoomSlider" destination="ApF-4X-XTk" id="nzf-YE-xzK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="36.431784107946029"/>
+        </scene>
+    </scenes>
+</document>

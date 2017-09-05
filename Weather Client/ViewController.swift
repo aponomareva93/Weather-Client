@@ -21,9 +21,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let initialCoordinate = (latitude: 34.1, longitude: -118.2)
     let initialSpan = 20.0
-    let verticalConstants = (verticalShowConstant: 34.0, verticalHideConstant: -120.0)
+    let verticalConstants = (verticalShowConstant: 16.0, verticalHideConstant: -120.0)
     
-    var currentCity: String?
+    var currentCity: CLPlacemark? {
+        didSet {
+            //update labels
+            cityLabel.text = currentCity!.locality
+            cityLabel.text = cityLabel.text! + "\nLatitude: \(currentCity!.location!.coordinate.latitude)"
+            cityLabel.text = cityLabel.text! + "\nLongitude: \(currentCity!.location!.coordinate.longitude)"
+            
+            //if cityDetailsView is hidden, show it and update constraints
+            if cityDetailsView.isHidden {
+                verticalConstraint.constant = CGFloat(verticalConstants.verticalShowConstant)
+                UIView.animate(withDuration: 0.5){ [weak self] in
+                    self?.cityDetailsView.isHidden = false
+                    self?.view.layoutIfNeeded() //tell the view to layout again
+                }
+            }
+        }
+    }
+    
+    
     
     func setZoom(_ coordinate: CLLocationCoordinate2D? = nil) {
         var currentCoordinate = coordinate
@@ -70,19 +88,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: {  [weak self] (placemarks, error) in
             if error != nil {
                 print(error!.localizedDescription)
-            } else {
-                if let placemark = placemarks?[0]{
-                    if placemark.locality != nil {
-                        self?.currentCity = placemark.locality!
-                        self?.verticalConstraint.constant = CGFloat((self?.verticalConstants.verticalShowConstant)!)
-                        UIView.animate(withDuration: 0.5){
-                            self?.cityDetailsView.isHidden = false
-                            self?.cityLabel.text = self?.currentCity
-                            self?.view.layoutIfNeeded() //tell the view to layout again
-                        }
-                        print ((self?.currentCity)!)
-                    }
-                }
+            } else if let placemark = placemarks?[0],
+                        placemark.locality != nil {
+                self?.currentCity = placemark
             }
         })
     }

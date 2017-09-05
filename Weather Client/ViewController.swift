@@ -22,6 +22,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     let initialCoordinate = (latitude: 34.1, longitude: -118.2)
     let initialSpan = 20.0
     let verticalConstants = (verticalShowConstant: 16.0, verticalHideConstant: -120.0)
+    let weatherSegueIdentifier = "ShowWeather"
     
     var currentCity: CLPlacemark? {
         didSet {
@@ -97,6 +98,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func sliderChanged(_ sender: UISlider) {
         setZoom()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier,
+            identifier == weatherSegueIdentifier,
+            let vc = segue.destination as? WeatherViewController {
+            vc.city = currentCity
+        }
     }
 }
 

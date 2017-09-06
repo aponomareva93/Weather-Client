@@ -12,7 +12,6 @@ import MapKit
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var zoomSlider: UISlider!
     @IBOutlet weak var cityDetailsView: UIView!
     @IBOutlet weak var verticalConstraint: NSLayoutConstraint!
     @IBOutlet weak var cityLabel: UILabel!
@@ -21,7 +20,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let initialCoordinate = (latitude: 34.1, longitude: -118.2)
     let initialSpan = 20.0
-    let verticalConstants = (verticalShowConstant: 16.0, verticalHideConstant: -120.0)
+    let verticalConstants = (verticalShowConstant: 54.0, verticalHideConstant: -120.0)
     let weatherSegueIdentifier = "ShowWeather"
     
     var currentCity: CLPlacemark? {
@@ -42,30 +41,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    
-    
-    func setZoom(_ coordinate: CLLocationCoordinate2D? = nil) {
-        var currentCoordinate = coordinate
-        if currentCoordinate == nil {
-            currentCoordinate = mapView.centerCoordinate
-        }
-        let zoom = Double(zoomSlider.value)
-        let span = MKCoordinateSpanMake(zoom, zoom)
-        let region = MKCoordinateRegionMake(currentCoordinate!, span)
-        mapView.setRegion(region, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //set zoomSlider defaults
-        zoomSlider.minimumValue = 1.0
-        zoomSlider.maximumValue = 100.0
-        zoomSlider.value = Float(initialSpan)
-        
         //focus mapView in initial coordinates
         let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: initialCoordinate.latitude, longitude: initialCoordinate.longitude)
-        setZoom(coordinate)
+        let span = MKCoordinateSpanMake(initialSpan, initialSpan)
+        let region = MKCoordinateRegionMake(coordinate, span)
+        mapView.setRegion(region, animated: true)
         
         //add handler for tap gesture (for defining tap coordinates in map view)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapHandler(byReactingTo:)))
@@ -94,10 +77,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 self?.currentCity = placemark
             }
         })
-    }
-    
-    @IBAction func sliderChanged(_ sender: UISlider) {
-        setZoom()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

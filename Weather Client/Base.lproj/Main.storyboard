@@ -54,29 +54,16 @@
                                     <constraint firstItem="EZx-AL-GLT" firstAttribute="top" secondItem="hYy-rx-6v2" secondAttribute="top" constant="8" id="kmo-Ph-dsv"/>
                                 </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="1" maxValue="70" translatesAutoresizingMaskIntoConstraints="NO" id="ApF-4X-XTk">
-                                <rect key="frame" x="14" y="465" width="347" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="PY5-Vn-nGA"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="CD3-Yl-fX6"/>
-                                </connections>
-                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ApF-4X-XTk" firstAttribute="top" secondItem="Ehc-YD-afb" secondAttribute="bottom" constant="8" id="0ie-c5-vAS"/>
-                            <constraint firstItem="ApF-4X-XTk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="4aL-Pr-sUE"/>
                             <constraint firstItem="Ehc-YD-afb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6aa-xi-RCu"/>
-                            <constraint firstItem="hYy-rx-6v2" firstAttribute="top" secondItem="ApF-4X-XTk" secondAttribute="bottom" constant="16" id="EHq-Oj-FUr"/>
                             <constraint firstItem="hYy-rx-6v2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="FWZ-7S-CSN"/>
                             <constraint firstItem="hYy-rx-6v2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JCl-PK-SiH"/>
                             <constraint firstAttribute="trailing" secondItem="Ehc-YD-afb" secondAttribute="trailing" id="LCj-Mu-1xb"/>
+                            <constraint firstItem="hYy-rx-6v2" firstAttribute="top" secondItem="Ehc-YD-afb" secondAttribute="bottom" constant="54" id="SO8-7i-Lop"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hYy-rx-6v2" secondAttribute="bottom" constant="26" id="TUr-r9-LBx"/>
-                            <constraint firstItem="ApF-4X-XTk" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="dgF-pU-xTD"/>
                             <constraint firstItem="Ehc-YD-afb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hp3-e0-aV2"/>
-                            <constraint firstItem="ApF-4X-XTk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rRq-eG-sXG"/>
                             <constraint firstItem="Ehc-YD-afb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sMW-Eq-PdW"/>
                         </constraints>
                     </view>
@@ -85,8 +72,7 @@
                         <outlet property="cityDetailsView" destination="hYy-rx-6v2" id="T4D-Ra-DDT"/>
                         <outlet property="cityLabel" destination="EZx-AL-GLT" id="GRG-Y9-kNw"/>
                         <outlet property="mapView" destination="Ehc-YD-afb" id="WCq-rf-bq7"/>
-                        <outlet property="verticalConstraint" destination="EHq-Oj-FUr" id="wS1-Gu-HnC"/>
-                        <outlet property="zoomSlider" destination="ApF-4X-XTk" id="nzf-YE-xzK"/>
+                        <outlet property="verticalConstraint" destination="SO8-7i-Lop" id="VyT-lM-SJg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

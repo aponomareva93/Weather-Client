@@ -11,6 +11,8 @@
 		95581FCB1F5E6E1400654C3D /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95581FCA1F5E6E1400654C3D /* WeatherViewController.swift */; };
 		95581FD11F5E895500654C3D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95581FCC1F5E87F200654C3D /* Alamofire.framework */; };
 		95581FD31F5EF21E00654C3D /* apikey.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95581FD21F5EF21E00654C3D /* apikey.txt */; };
+		955A34461F5FB6AA0031B9CF /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 955A34451F5FB6AA0031B9CF /* no-image.png */; };
+		955A34481F5FCB5C0031B9CF /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955A34471F5FCB5C0031B9CF /* Kingfisher.framework */; };
 		95B5714B1F5D1DF0005D2ED9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5714A1F5D1DF0005D2ED9 /* AppDelegate.swift */; };
 		95B5714D1F5D1DF0005D2ED9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B5714C1F5D1DF0005D2ED9 /* ViewController.swift */; };
 		95B571501F5D1DF0005D2ED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95B5714E1F5D1DF0005D2ED9 /* Main.storyboard */; };
@@ -25,6 +27,8 @@
 		95581FCA1F5E6E1400654C3D /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		95581FCC1F5E87F200654C3D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Weather_Client-fdwgfmiscqpjnofudrxyegflwfsx/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		95581FD21F5EF21E00654C3D /* apikey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apikey.txt; sourceTree = "<group>"; };
+		955A34451F5FB6AA0031B9CF /* no-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image.png"; sourceTree = "<group>"; };
+		955A34471F5FCB5C0031B9CF /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Weather_Client-fdwgfmiscqpjnofudrxyegflwfsx/Build/Products/Debug-iphonesimulator/Kingfisher/Kingfisher.framework"; sourceTree = "<group>"; };
 		95B571471F5D1DF0005D2ED9 /* Weather Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95B5714A1F5D1DF0005D2ED9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Weather Client/AppDelegate.swift"; sourceTree = "<group>"; };
 		95B5714C1F5D1DF0005D2ED9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				955A34481F5FCB5C0031B9CF /* Kingfisher.framework in Frameworks */,
 				95581FD11F5E895500654C3D /* Alamofire.framework in Frameworks */,
 				95B5715F1F5D2020005D2ED9 /* MapKit.framework in Frameworks */,
 				5FB99027C7F9E1D450D4FFE3 /* Pods_Weather_Client.framework in Frameworks */,
@@ -62,6 +67,7 @@
 		95B5713E1F5D1DF0005D2ED9 = {
 			isa = PBXGroup;
 			children = (
+				955A34451F5FB6AA0031B9CF /* no-image.png */,
 				95581FD21F5EF21E00654C3D /* apikey.txt */,
 				95B5715C1F5D1E03005D2ED9 /* Supporting Files */,
 				95B571491F5D1DF0005D2ED9 /* Weather Client */,
@@ -103,6 +109,7 @@
 		95B5715D1F5D201F005D2ED9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				955A34471F5FCB5C0031B9CF /* Kingfisher.framework */,
 				95581FCC1F5E87F200654C3D /* Alamofire.framework */,
 				95B5715E1F5D2020005D2ED9 /* MapKit.framework */,
 				63A72B870D7B8A8B178D747C /* Pods_Weather_Client.framework */,
@@ -175,6 +182,7 @@
 				95B571551F5D1DF0005D2ED9 /* LaunchScreen.storyboard in Resources */,
 				95B571521F5D1DF0005D2ED9 /* Assets.xcassets in Resources */,
 				95B571501F5D1DF0005D2ED9 /* Main.storyboard in Resources */,
+				955A34461F5FB6AA0031B9CF /* no-image.png in Resources */,
 				95581FD31F5EF21E00654C3D /* apikey.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,10 +198,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Weather Client/Pods-Weather Client-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

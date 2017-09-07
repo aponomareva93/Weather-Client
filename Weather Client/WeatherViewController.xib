@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherViewController" customModule="Weather_Client" customModuleProvider="target">
+            <connections>
+                <outlet property="humidityLabel" destination="ki4-b1-beo" id="5Yz-QT-t5o"/>
+                <outlet property="iconImageView" destination="OBE-hy-fmS" id="ZKJ-0a-F4p"/>
+                <outlet property="pressureLabel" destination="Nd9-wx-FwL" id="Jlm-dA-aZx"/>
+                <outlet property="temperatureLabel" destination="lFj-1S-Rgf" id="cHO-Ca-lSN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weatherDescriptionLabel" destination="voJ-93-JjJ" id="bV2-NK-BsL"/>
+                <outlet property="windSpeedLabel" destination="Oka-3L-Ztj" id="lhW-kP-TbC"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFj-1S-Rgf">
+                    <rect key="frame" x="16" y="194" width="343" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind speed: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oka-3L-Ztj">
+                    <rect key="frame" x="16" y="281" width="343" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pressure: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nd9-wx-FwL">
+                    <rect key="frame" x="16" y="252" width="343" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki4-b1-beo">
+                    <rect key="frame" x="16" y="223" width="343" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OBE-hy-fmS">
+                    <rect key="frame" x="149" y="110" width="76" height="76"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="76" id="H2N-Si-ul0"/>
+                        <constraint firstAttribute="height" constant="76" id="ozM-uX-BwL"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather description: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voJ-93-JjJ">
+                    <rect key="frame" x="16" y="58" width="343" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="RJi-yc-JCD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="lFj-1S-Rgf" firstAttribute="top" secondItem="OBE-hy-fmS" secondAttribute="bottom" constant="8" symbolic="YES" id="05L-cx-Vwe"/>
+                <constraint firstItem="Nd9-wx-FwL" firstAttribute="leading" secondItem="Oka-3L-Ztj" secondAttribute="leading" id="0LI-8g-FDS"/>
+                <constraint firstItem="voJ-93-JjJ" firstAttribute="trailing" secondItem="Nd9-wx-FwL" secondAttribute="trailing" id="2XA-hy-hN9"/>
+                <constraint firstItem="voJ-93-JjJ" firstAttribute="leading" secondItem="lFj-1S-Rgf" secondAttribute="leading" id="4Zb-hn-3XU"/>
+                <constraint firstItem="voJ-93-JjJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="58" id="5Ew-jX-yAC"/>
+                <constraint firstItem="Oka-3L-Ztj" firstAttribute="top" secondItem="Nd9-wx-FwL" secondAttribute="bottom" constant="8" symbolic="YES" id="EKw-xN-u1P"/>
+                <constraint firstItem="ki4-b1-beo" firstAttribute="top" secondItem="lFj-1S-Rgf" secondAttribute="bottom" constant="8" symbolic="YES" id="PRx-mV-bSt"/>
+                <constraint firstItem="voJ-93-JjJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Sid-vO-xkC"/>
+                <constraint firstItem="lFj-1S-Rgf" firstAttribute="leading" secondItem="ki4-b1-beo" secondAttribute="leading" id="Soi-gU-qQj"/>
+                <constraint firstItem="voJ-93-JjJ" firstAttribute="trailing" secondItem="lFj-1S-Rgf" secondAttribute="trailing" id="Wzl-TK-Leo"/>
+                <constraint firstItem="Nd9-wx-FwL" firstAttribute="top" secondItem="ki4-b1-beo" secondAttribute="bottom" constant="8" symbolic="YES" id="dKn-rY-f1M"/>
+                <constraint firstItem="voJ-93-JjJ" firstAttribute="trailing" secondItem="ki4-b1-beo" secondAttribute="trailing" id="iGq-il-p7D"/>
+                <constraint firstItem="OBE-hy-fmS" firstAttribute="top" secondItem="voJ-93-JjJ" secondAttribute="bottom" constant="8" symbolic="YES" id="l5W-dF-uru"/>
+                <constraint firstItem="ki4-b1-beo" firstAttribute="leading" secondItem="Nd9-wx-FwL" secondAttribute="leading" id="n6m-2m-b1G"/>
+                <constraint firstItem="OBE-hy-fmS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="o7O-hb-2jD"/>
+                <constraint firstItem="voJ-93-JjJ" firstAttribute="trailing" secondItem="Oka-3L-Ztj" secondAttribute="trailing" id="qbQ-dI-e6v"/>
+                <constraint firstItem="voJ-93-JjJ" firstAttribute="centerX" secondItem="OBE-hy-fmS" secondAttribute="centerX" id="tN5-q2-S9U"/>
+            </constraints>
+            <point key="canvasLocation" x="24.5" y="52.5"/>
+        </view>
+    </objects>
+</document>

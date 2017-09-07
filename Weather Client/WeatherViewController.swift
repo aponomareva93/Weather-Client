@@ -2,7 +2,7 @@
 //  WeatherViewController.swift
 //  Weather Client
 //
-//  Created by anna on 05.09.17.
+//  Created by anna on 07.09.17.
 //  Copyright © 2017 anna. All rights reserved.
 //
 
@@ -12,14 +12,21 @@ import Alamofire
 import Kingfisher
 
 class WeatherViewController: UIViewController {
-    
+
     @IBOutlet weak var weatherDescriptionLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var pressureLabel: UILabel!
-    @IBOutlet weak var windSpeedLabel: UILabel!    
+    @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
+    override func loadView() {
+        if let array = Bundle.main.loadNibNamed("WeatherViewController", owner: self, options: nil) {
+            if array.count > 0 {
+                self.view = array[0] as? UIView
+            }
+        }
+    }
     
     var city: CLPlacemark? {
         didSet {
@@ -170,11 +177,9 @@ class WeatherViewController: UIViewController {
             if let icon = weatherSection[0]["icon"] as? String {
                 let imageURL = URL(string: String("http://openweathermap.org/img/w/" + icon + ".png"))
                 if let url = imageURL {
-                    spinner.startAnimating()
                     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                         DispatchQueue.main.async {
                             self?.iconImageView.kf.setImage(with: url, placeholder: self?.placeholderImage)
-                            self?.spinner.stopAnimating()
                         }
                     }
                 }
@@ -198,4 +203,5 @@ class WeatherViewController: UIViewController {
             createAlert(title: "Parsing JSON error", message: alertMessage)
         }
     }
+
 }

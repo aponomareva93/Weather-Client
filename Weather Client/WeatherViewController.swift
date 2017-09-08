@@ -54,12 +54,21 @@ class WeatherViewController: UIViewController {
     }
     
     private func getWeather () {
-        let cityName = city!.locality!.components(separatedBy: " ").joined(separator: "")
+        let cityName = city?.locality
         SVProgressHUD.show(withStatus: "Loading")
-        NetworkManager.fetchWeather(from: cityName, withHandler: { [weak self] (responseJSON) in
+        if let error = NetworkManager.fetchWeather(from: cityName, withHandler: { [weak self] (responseJSON, error) in
+            if error != nil {
+                SVProgressHUD.dismiss()
+                self?.showAlert(withTitle: "Error", message: error!.localizedDescription, okButtonTapped: {_ = self?.navigationController?.popViewController(animated: true)})
+                return
+            }
             self?.weather = Weather(fromJSON: responseJSON)
             SVProgressHUD.dismiss()
-        })
+        }) {
+            SVProgressHUD.dismiss()
+            showAlert(withTitle: "Error", message: error.localizedDescription, okButtonTapped: {[weak self]  in
+                _ = self?.navigationController?.popViewController(animated: true)})
+        }
     }
     
     private func setLabelText(parameterDescription: String, text: String?, label: UILabel?) {

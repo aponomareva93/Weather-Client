@@ -10,20 +10,24 @@ import Foundation
 import Alamofire
 
 class NetworkManager {
-    class func createRequest(url: URLConvertible, method: HTTPMethod, responseJSONHandler: @escaping ([String: Any]?, NSError?) -> Void) {
+    class func createRequest(url: URLConvertible,
+                             method: HTTPMethod,
+                             responseJSONHandler: @escaping ([String: Any]?, NSError?) -> Void) {
         Alamofire.request(
             url,
             method: method)
             .validate()
             .responseJSON(completionHandler: {(response) in
-                
+
                 var error: NSError?
                 if response.result.isSuccess {
                     if let value = response.result.value as? [String: Any] {
                         responseJSONHandler(value, nil)
                     } else {
                         print("NetworkManager::Cannot create JSON from response")
-                        error = NSError(domain: "weather domain", code: 3, userInfo: [NSLocalizedDescriptionKey: "Cannot create JSON from response"])
+                        error = NSError(domain: Constants.invaliJSONResponseError.domain,
+                                        code: Constants.invaliJSONResponseError.code,
+                                        userInfo: Constants.invaliJSONResponseError.userInfo)
                         responseJSONHandler(nil, error)
                     }
                 } else {
@@ -33,22 +37,44 @@ class NetworkManager {
                 }
             })
     }
-    
-    class func fetchWeather(from city: String?, withHandler: @escaping ([String: Any]?, NSError?) -> Void) -> NSError? {
+
+    class func fetchWeather(from city: String?,
+                            withHandler: @escaping ([String: Any]?, NSError?) -> Void) -> NSError? {
         if city != nil {
             let cityNameForURL = city!.components(separatedBy: " ").joined(separator: "")
-            let urlString = "http://api.openweathermap.org/data/2.5/weather?q=" + cityNameForURL + "&appid=" + APIKey.key
+            let urlString = "http://api.openweathermap.org/data/2.5/weather?q=" +
+                cityNameForURL +
+                "&appid=" +
+                APIKey.key
             guard let url = URL(string: urlString) else {
                 print("NetworkManager::Cannot create url \(urlString)")
-                return NSError(domain: "weather domain", code: 2, userInfo: [NSLocalizedDescriptionKey: "Cannot create url for city \(city!)"])
+                return NSError(domain: Constants.invalidURLError.domain,
+                               code: Constants.invalidURLError.code,
+                               userInfo: Constants.invalidURLError.userInfo)
             }
-            
+
             createRequest(url: url, method: .get, responseJSONHandler: withHandler)
             return nil
         } else {
             print("NetworkManager::current city is nil")
-            return NSError(domain: "weather domain", code: 1, userInfo: [NSLocalizedDescriptionKey: "City is not defined"])
+            return NSError(domain: Constants.nilCityError.domain,
+                           code: Constants.nilCityError.code,
+                           userInfo: Constants.nilCityError.userInfo)
         }
     }
 }
 
+fileprivate extension Constants {
+    static let nilCityError = (domain: "weather domain",
+                               code: 1,
+                               userInfo: [NSLocalizedDescriptionKey: "City is not defined"])
+
+    static let invalidURLError = (domain: "weather domain",
+                                  code: 2,
+                                  userInfo: [NSLocalizedDescriptionKey:
+                                    "Cannot create url for current city"])
+    static let invaliJSONResponseError = (domain: "weather domain",
+                                          code: 3,
+                                          userInfo: [NSLocalizedDescriptionKey:
+                                            "Cannot create JSON from response"])
+}

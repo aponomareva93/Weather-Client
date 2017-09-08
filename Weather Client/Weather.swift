@@ -11,6 +11,7 @@ import UIKit
 
 typealias Celsius = Double
 typealias mmHg = Double
+
 struct Weather {
     var description: String?
     var temperature: Celsius?
@@ -18,26 +19,28 @@ struct Weather {
     var pressure: mmHg?
     var windSpeed: Double?
     var iconURL: URL?
-    
+
     init(fromJSON JSON: [String: Any]?) {
         if let mainSection = JSON?["main"] as? [String: Any] {
-            temperature = mainSection["temp"] as? Double
-            temperature = temperature?.fromKelvinToCelsius()
+            if let temperatureInKelvins = mainSection["temp"] as? Double {
+                temperature = temperatureInKelvins.fromKelvinToCelsius()
+            }
             
             humidity = mainSection["humidity"] as? Double
-            
-            pressure = mainSection["pressure"] as? Double
-            pressure = pressure?.fromHPaTommHg()
+
+            if let pressureInHPa = mainSection["pressure"] as? Double {
+                pressure = pressureInHPa.fromHPaTommHg()
+            }
         } else {
             print("Weather::init:Cannot parse \"main\"-section")
         }
-        
+
         if let windSection = JSON?["wind"] as? [String: Any] {
             windSpeed = windSection["speed"] as? Double
         } else {
             print("Weather::init:Cannot parse \"wind\"-section")
         }
-        
+
         if let weatherSection = JSON?["weather"] as? [[String: Any]] {
             description = String()
             for section in weatherSection {
@@ -46,9 +49,10 @@ struct Weather {
                 }
             }
             description = description?.trimmingCharacters(in: .punctuationCharacters)
-            
+
             if let icon = weatherSection[0]["icon"] as? String {
-                if let url = URL(string: String("http://openweathermap.org/img/w/" + icon + ".png")) {
+                let urlString = "http://openweathermap.org/img/w/" + icon + ".png"
+                if let url = URL(string: urlString) {
                     iconURL = url
                 } else {
                     print("Weather::init:Cannot fetch icon from url")
@@ -62,20 +66,12 @@ struct Weather {
     }
 }
 
-extension Celsius {
+fileprivate extension Double {
     func fromKelvinToCelsius() -> Celsius {
         return self - 273.15
     }
-}
 
-extension mmHg {
     func fromHPaTommHg() -> mmHg {
         return self * 0.75
-    }
-}
-
-extension Double {
-    func fromDecimalToString() -> String {
-        return String(format: "%.0f", self)
     }
 }

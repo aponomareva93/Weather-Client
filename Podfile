@@ -8,4 +8,5 @@ target 'Weather Client' do
   pod 'Alamofire', '~> 4.5'
   pod 'Kingfisher', '~> 3.0'
   pod 'SVProgressHUD'
+  pod 'SwiftLint'
 end

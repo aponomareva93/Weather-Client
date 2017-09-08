@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import Kingfisher
 
 class NetworkManager {
     class func createRequest(url: URLConvertible, method: HTTPMethod, responseJSONHandler: @escaping ([String: Any]?) -> Void) {

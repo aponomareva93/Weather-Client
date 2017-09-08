@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Alamofire
 import Kingfisher
+import SVProgressHUD
 
 class WeatherViewController: UIViewController {
 
@@ -44,69 +45,51 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //iconImageView?.image = placeholderImage
         getWeather()
     }
     
-    private func createAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        SVProgressHUD.dismiss()
     }
-    
-    struct Test {
-        var testDouble: Double?
-    }
-    var test: Test?
     
     private func getWeather () {
         let cityName = city!.locality!.components(separatedBy: " ").joined(separator: "")
+        SVProgressHUD.show(withStatus: "Loading")
         NetworkManager.fetchWeather(from: cityName, withHandler: { [weak self] (responseJSON) in
             self?.weather = Weather(fromJSON: responseJSON)
+            SVProgressHUD.dismiss()
         })
     }
     
+    private func setLabelText(parameterDescription: String, text: String?, label: UILabel?) {
+        if let labelText = text, !labelText.isEmpty {
+            label?.text = parameterDescription + ": " + labelText
+        } else {
+            label?.isHidden = true
+        }
+    }
+    
     private func updateUI() {
-        if let descriptions = weather?.description,
-            !descriptions.isEmpty {
-            var descriptionText = String()
-            for description in descriptions {
-                if description != nil {
-                    descriptionText += description! + ","
-                }
-            }
-            descriptionText = descriptionText.trimmingCharacters(in: .punctuationCharacters)
-            weatherDescriptionLabel?.text = descriptionText
-        } else {
-            weatherDescriptionLabel?.isHidden = true
-        }
-        
-        if let temperature = weather?.temperature {
-            temperatureLabel?.text = String(format: "%.0f", temperature)
-        } else {
-            temperatureLabel?.isHidden = true
-        }
-        
-        if let humidity = weather?.humidity {
-            humidityLabel?.text = String(format: "%.0f", humidity)
-        } else {
-            humidityLabel?.isHidden = true
-        }
-        
-        if let pressure = weather?.mmHgPressure {
-            pressureLabel?.text = String(format: "%.0f", pressure)
-        } else {
-            pressureLabel?.isHidden = true
-        }
-        
-        if let windSpeed = weather?.windSpeed {
-            windSpeedLabel?.text = String(format: "%.0f", windSpeed)
-        } else {
-            windSpeedLabel?.isHidden = true
-        }
+        setLabelText(parameterDescription:"Description", text: weather?.description, label: weatherDescriptionLabel)
+        setLabelText(parameterDescription:"Temperature, ℃", text: weather?.temperature?.fromDecimalToString(), label: temperatureLabel)
+        setLabelText(parameterDescription:"Humidity, %", text: weather?.humidity?.fromDecimalToString(), label: humidityLabel)
+        setLabelText(parameterDescription:"Pressure, mmHg", text: weather?.pressure?.fromDecimalToString(), label: pressureLabel)
+        setLabelText(parameterDescription:"Wind speed, meter/sec", text: weather?.windSpeed?.fromDecimalToString(), label: windSpeedLabel)
         
         if let iconURL = weather?.iconURL {
             iconImageView.kf.setImage(with: iconURL, placeholder: placeholderImage)
         }
+    }
+}
+
+extension UIViewController {
+    func showAlert(withTitle title: String, message: String, okButtonTapped: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            okButtonTapped?()
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 }

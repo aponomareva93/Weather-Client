@@ -7,4 +7,5 @@ target 'Weather Client' do
   # Pods for Weather Client
   pod 'Alamofire', '~> 4.5'
   pod 'Kingfisher', '~> 3.0'
+  pod 'SVProgressHUD'
 end

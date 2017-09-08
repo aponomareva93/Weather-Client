@@ -20,7 +20,7 @@ struct Weather {
     var iconURL: URL?
     
     init(fromJSON JSON: [String: Any]?) {
-        if let mainSection = JSON?["main1"] as? [String: Any] {
+        if let mainSection = JSON?["main"] as? [String: Any] {
             temperature = mainSection["temp"] as? Double
             temperature = temperature?.fromKelvinToCelsius()
             

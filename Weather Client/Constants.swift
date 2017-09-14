@@ -9,6 +9,4 @@
 import Foundation
 
 struct Constants {
-    static let mapViewControllerXib = "MapViewController"
-    static let weatherViewControllerXib = "WeatherViewController"
 }

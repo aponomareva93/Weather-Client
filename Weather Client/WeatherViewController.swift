@@ -29,16 +29,6 @@ class WeatherViewController: UIViewController {
         }
     }
 
-    override func loadView() {
-        if let array = Bundle.main.loadNibNamed(Constants.weatherViewControllerXib,
-                                                owner: self,
-                                                options: nil) {
-            if array.count > 0 {
-                self.view = array[0] as? UIView
-            }
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         getWeather()
@@ -49,11 +39,11 @@ class WeatherViewController: UIViewController {
         SVProgressHUD.dismiss()
     }
 
-    init(nibName: String?, bundle: Bundle?, city: CLPlacemark?) {
-        super.init(nibName: nibName, bundle: bundle)
+    init(city: CLPlacemark?) {
+        super.init(nibName: nil, bundle: nil)
         self.city = city
-        if city != nil {
-            title = city!.locality
+        if let city = city {
+            title = city.locality
         }
     }
 
@@ -64,31 +54,22 @@ class WeatherViewController: UIViewController {
     private func getWeather () {
         let cityName = city?.locality
         SVProgressHUD.show(withStatus: "Loading")
-        let error =
-            NetworkManager.fetchWeather(
-                from: cityName,
-                withHandler: { [weak self] (responseJSON, error) in
-                    if error != nil {
-                        SVProgressHUD.dismiss()
-                        self?.showAlert(withTitle: "Error",
-                                        message: error!.localizedDescription,
-                                        okButtonTapped: {
-                                            _ = self?.navigationController?.popViewController(animated: true)
-                        }
-                        )
-                        return
-                    }
-                    self?.weather = Weather(fromJSON: responseJSON)
+        NetworkManager.fetchWeather(
+            from: cityName,
+            withHandler: { [weak self] (responseObject: Response<Weather>) in
+                switch responseObject {
+                case .success(let weather):
+                    self?.weather = weather
                     SVProgressHUD.dismiss()
-            })
-        if let errorForAlert = error {
-            SVProgressHUD.dismiss()
-            showAlert(withTitle: "Error",
-                      message: errorForAlert.localizedDescription,
-                      okButtonTapped: {[weak self]  in
-                _ = self?.navigationController?.popViewController(animated: true)})
-        }
-
+                case .failure(let error):
+                    SVProgressHUD.dismiss()
+                    self?.showAlert(withTitle: "Error",
+                                    message: error.localizedDescription,
+                                    okButtonTapped: {
+                                        _ = self?.navigationController?.popViewController(animated: true)
+                    })
+                }
+        })
     }
 
     private func setLabelText(parameterDescription: String, text: String?, label: UILabel?) {

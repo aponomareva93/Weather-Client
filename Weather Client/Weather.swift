@@ -12,7 +12,7 @@ import UIKit
 typealias Celsius = Double
 typealias mmHg = Double
 
-struct Weather {
+struct Weather: JSONMappable {
     var description: String?
     var temperature: Celsius?
     var humidity: Double?
@@ -20,7 +20,7 @@ struct Weather {
     var windSpeed: Double?
     var iconURL: URL?
 
-    init(fromJSON JSON: [String: Any]?) {
+    init(fromJSON JSON: [String: Any]?) throws {
         if let mainSection = JSON?["main"] as? [String: Any] {
             if let temperatureInKelvins = mainSection["temp"] as? Double {
                 temperature = temperatureInKelvins.fromKelvinToCelsius()
@@ -61,7 +61,19 @@ struct Weather {
                 print("Weather::init:Cannot fetch icon id from JSON")
             }
         } else {
-            print("Weather::weatherinit:Cannot parse \"weather\"-section")
+            print("Weather::init:Cannot parse \"weather\"-section")
+        }
+        
+        guard description == nil,
+            temperature == nil,
+            humidity == nil,
+            pressure == nil,
+            windSpeed == nil,
+            iconURL == nil else {
+            let error = NSError(domain: Constants.invalidJSONDataError.domain,
+                                code: Constants.invalidJSONDataError.code,
+                                userInfo: Constants.invalidJSONDataError.userInfo)
+            throw error
         }
     }
 }
@@ -74,4 +86,10 @@ fileprivate extension Double {
     func fromHPaTommHg() -> mmHg {
         return self * 0.75
     }
+}
+
+fileprivate extension Constants {
+    static let invalidJSONDataError = (domain: "weather init domain",
+                               code: 1,
+                               userInfo: [NSLocalizedDescriptionKey: "Impossible to fetch weather parameters from JSON data"])
 }

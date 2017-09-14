@@ -36,16 +36,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
-
-    override func loadView() {
-        if let array = Bundle.main.loadNibNamed(Constants.mapViewControllerXib,
-                                                owner: self, options: nil) {
-            if array.count > 0 {
-                self.view = array[0] as? UIView
-            }
-        }
-    }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -79,8 +70,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         CLGeocoder().reverseGeocodeLocation(location,
                                             completionHandler: {
                                                 [weak self] (placemarks, error) in
-                                                if error != nil {
-                                                    print(error!.localizedDescription)
+                                                if let error = error {
+                                                    print(error.localizedDescription)
                                                 } else if let placemark = placemarks?[0],
                                                     placemark.locality != nil {
                                                     self?.currentCity = placemark
@@ -91,9 +82,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBAction private func showWeather(_ sender: UIButton) {
         let weatherViewController =
-            WeatherViewController(nibName: Constants.weatherViewControllerXib,
-                                  bundle: nil,
-                                  city: currentCity)
+            WeatherViewController(city: currentCity)
         navigationController?.pushViewController(weatherViewController, animated: true)
     }
 }

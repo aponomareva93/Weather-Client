@@ -22,7 +22,7 @@ class NetworkManager {
     class func baseRequest<T: JSONMappable>(url: URLConvertible?,
                              method: HTTPMethod,
                              completion: @escaping (Response<T>) -> Void) {
-        
+
         guard let url = url else {
             let error = NSError(domain: Constants.invalidURLError.domain,
                                 code: Constants.invalidURLError.code,
@@ -30,13 +30,12 @@ class NetworkManager {
             completion(.failure(error))
             return
         }
-        
+
         Alamofire.request(
             url,
             method: method)
             .validate()
-            .responseJSON(completionHandler: {(response) in
-
+            .responseJSON(completionHandler: {response in
                 switch response.result {
                 case .success(let value):
                     if let value = value as? [String: Any] {

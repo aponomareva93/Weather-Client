@@ -36,7 +36,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

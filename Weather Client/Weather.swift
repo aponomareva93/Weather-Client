@@ -25,7 +25,7 @@ struct Weather: JSONMappable {
             if let temperatureInKelvins = mainSection["temp"] as? Double {
                 temperature = temperatureInKelvins.fromKelvinToCelsius()
             }
-            
+
             humidity = mainSection["humidity"] as? Double
 
             if let pressureInHPa = mainSection["pressure"] as? Double {
@@ -63,13 +63,13 @@ struct Weather: JSONMappable {
         } else {
             print("Weather::init:Cannot parse \"weather\"-section")
         }
-        
-        guard description == nil,
-            temperature == nil,
-            humidity == nil,
-            pressure == nil,
-            windSpeed == nil,
-            iconURL == nil else {
+
+        guard description != nil,
+            temperature != nil,
+            humidity != nil,
+            pressure != nil,
+            windSpeed != nil,
+            iconURL != nil else {
             let error = NSError(domain: Constants.invalidJSONDataError.domain,
                                 code: Constants.invalidJSONDataError.code,
                                 userInfo: Constants.invalidJSONDataError.userInfo)
